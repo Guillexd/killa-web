@@ -4,6 +4,6 @@
 
 <template>
   <main>
-    hola
+    Servicios
   </main>
 </template>
