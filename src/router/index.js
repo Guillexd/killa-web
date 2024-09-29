@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Inicio from '../Inicio.vue'
 import Nosotros from '../Nosotros.vue'
 import Productos from '../Productos.vue'
-import Servicios from '../Servicios.vue'
 import Contactanos from '../Contactanos.vue'
 
 const router = createRouter({
@@ -21,14 +20,13 @@ const router = createRouter({
       component: Productos
     },
     {
-      path: '/servicios',
-      component: Servicios
-    },
-    {
       path: '/contactanos',
       component: Contactanos
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  },
 })
 
 export default router
