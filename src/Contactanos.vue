@@ -3,23 +3,35 @@ import { ref } from 'vue'
 import { z } from 'zod'
 
 const form = ref({
-  name: '',
-  phone: '',
-  email: '',
-  interest: '',
-  message: '',
+  name: null,
+  phone: null,
+  email: null,
+  interest: null,
+  message: null,
 })
 const errors = ref({})
 
 const validations = z.object({
-  name: z.string().min(4, { message: 'El nombre es obligatorio' }),
+  name: z.string({
+    required_error: 'El nombre es obligatorio',
+    invalid_type_error: 'El nombre es obligatorio',
+  }).min(4, { message: 'El nombre es debe ser de mínimo 4 caracteres' }),
   phone: z.number({
-    required_error: 'La edad es obligatorio',
+    required_error: 'El teléfono es obligatorio',
     invalid_type_error: 'El teléfono es obligatorio',
   }).gt(900000000, 'Debe ser un número de teléfono válido').lt(999999999, 'Debe ser un número de teléfono válido'),
-  email: z.string().min(1, { message: 'El correo electrónico es obligatorio' }).email('El correo electrónico no es válido'),
-  interest: z.string().min(1, { message: 'Selecciona una opción' }),
-  message: z.string().min(1, { message: 'El mensaje es obligatorio' }).min(10, 'El mensaje debe tener al menos 10 caracteres'),
+  email: z.string({
+    required_error: 'El correo electrónico es obligatorio',
+    invalid_type_error: 'El correo electrónico es obligatorio',
+  }).email('El correo electrónico no es válido'),
+  interest: z.string({
+    required_error: 'Selecciona una opción',
+    invalid_type_error: 'Selecciona una opción',
+  }),
+  message: z.string({
+    required_error: 'El mensaje es obligatorio',
+    invalid_type_error: 'El mensaje es obligatorio',
+  }).min(10, 'El mensaje debe tener al menos 10 caracteres'),
 })
 
 const enviarDatos = () => {
@@ -70,7 +82,6 @@ const enviarDatos = () => {
             <label for="interest" class="block text-sm font-medium text-gray-700">¿Qué te interesó?</label>
             <select id="interest" v-model="form.interest"
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500">
-              <option value="">Selecciona una opción</option>
               <option value="vinos">Vinos</option>
               <option value="cervezas">Cervezas artesanales</option>
               <option value="licores">Licores (ron, vodka, gin, etc.)</option>
