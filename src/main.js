@@ -1,11 +1,9 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import NavBar from './NavBar.vue'
-import router from './router'
+import Contactanos from './Contactanos.vue'
 
-const app = createApp(NavBar)
-
-app.use(router)
+const app = createApp(Contactanos
+)
 
 app.mount('#app')
